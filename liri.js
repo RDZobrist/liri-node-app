@@ -1,4 +1,4 @@
-const client = require('./keys.js');
+const keys = require('./keys.js');
 const inquire = require('inquirer');
 const fs = require('fs');
 var command = process.argv[2];
@@ -9,7 +9,7 @@ var Twitter = require('twitter');
 var Spotify = require('node-spotify-api');
 var song;
 var request = require("request");
-
+var movie;
 
 var spotify = new Spotify({
      id: spotifyID,
@@ -22,7 +22,16 @@ switch (command) {
 
      case "spotify-this-song":
           if (process.argv[3]) { //if parameter exists
-               song = process.argv[3]; // store parameter in variable named song
+               song = process.argv[3];
+               if(process.argv[4]){
+                song = song + " " + process.argv[4];
+                       }
+                       if(process.argv[5]){
+                         song = song + " " + process.argv[4] + " " + process.argv[5];
+                       }if(process.argv[6]){
+                         song = song + " " + process.argv[4] + " " + process.argv[5] + " " + process.argv[6];
+
+                       } // store parameter in variable named song
                clMySong(song); // print song data to console 
           } else { // if no paramter exisits at index [3]
 
@@ -43,12 +52,14 @@ switch (command) {
 
 // get tweets
 function tweetTweet() {
-     const twitter = new Twitter(client);
+    
+     const client = new Twitter (keys.twitterKeys);
+
      var params = { screen_name: 'DEVrdz88' };
-     twitter.get('statuses/user_timeline', params, function(error, tweets, response) {
+     client.get('statuses/user_timeline', params, function(error, tweets, response) {
           if (!error) {
                console.log(tweets);
-               console.log(response);
+               
           } else { console.log(error); }
      });
 }
@@ -102,10 +113,10 @@ function clMySong(song) {
                }
           });
 };
-// get data on movie from omdbbody
-function movieData(movie) {
+/// get data on movie from omdbbody
+function movieData() {
      if (process.argv[3]) {
-          let movie = process.argv[3];
+          movie = process.argv[3];
      }
      if (process.argv[4]) {
           movie = movie + " " + process.argv[4];
