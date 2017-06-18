@@ -10,6 +10,7 @@ var Spotify = require('node-spotify-api');
 var song;
 var request = require("request");
 
+
 var spotify = new Spotify({
      id: spotifyID,
      secret: spotifySecret
@@ -87,8 +88,10 @@ function clMySong(song) {
           });
 };
 // get data on movie from omdbbody
-function movieData() {
-     let movie = process.argv[3];
+function movieData(movie) {
+     if (process.argv[3]) {
+          let movie = process.argv[3];
+     }
      if (process.argv[4]) {
           movie = movie + " " + process.argv[4];
           // if movie title is two words, concatonate paramters 4 and 5
@@ -135,6 +138,35 @@ function movieData() {
 
 
 // get command from external js file 
-// function extCmd() {
-//      console.log("we need to us fs.Readfile");
-// };
+function extCmd() {
+     // This block of code will read from the "movies.txt" file.
+     // It's important to include the "utf8" parameter or the code will provide stream data (garbage)
+     // The code will store the contents of the reading inside the variable "data"
+     fs.readFile("random.txt", "utf8", function(error, data) {
+
+          // If the code experiences any errors it will log the error to the console.
+          if (error) {
+               return console.log(error);
+          }
+
+
+
+          // Then split it by commas (to make it more readable)
+          var dataAdj = data.split(",");
+
+          // We will then re-display the content as an array for later use.
+          let command = dataAdj[0];
+          if (command === "spotify-this-song") {
+               song = dataAdj[1];
+               clMySong(song);
+
+          }
+          if (command === "movie-this") {
+               movie = dataAdj[1];
+               movieData(movie);
+
+          }
+
+     });
+
+};
