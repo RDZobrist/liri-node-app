@@ -73,15 +73,30 @@ function clMySong(song) {
 
                     // extracting data from nestesd array of objects
                     // storing data to local variables
+
                     let artist = songData.artists[0].name;
                     let songName = songData.name;
                     let albumName = songData.album.name;
                     let songPreview = songData.preview_url;
+                    // object literal ontaining song's data 
+                 
                     // printing applicable data to screen
                     console.log("Artist: " + artist);
                     console.log("Song name : " + songName);
                     console.log("Album name: " + albumName);
                     console.log("Song Preview : " + songPreview);
+                    fs.appendFile("log.txt", "  Artist: "+ artist + "  Song: "+ songName+ "  Album: "+albumName +"  Song Preview: "+ songPreview, function(err) {
+
+  // If the code experiences any errors it will log the error to the console.
+  if (err) {
+    return console.log(err);
+  }
+
+  // Otherwise, it will print: "movies.txt was updated!"
+  console.log("log.txt was updated!");
+
+});
+
 
 
                }
