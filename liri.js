@@ -23,15 +23,16 @@ switch (command) {
      case "spotify-this-song":
           if (process.argv[3]) { //if parameter exists
                song = process.argv[3];
-               if(process.argv[4]){
-                song = song + " " + process.argv[4];
-                       }
-                       if(process.argv[5]){
-                         song = song + " " + process.argv[4] + " " + process.argv[5];
-                       }if(process.argv[6]){
-                         song = song + " " + process.argv[4] + " " + process.argv[5] + " " + process.argv[6];
+               if (process.argv[4]) {
+                    song = song + " " + process.argv[4];
+               }
+               if (process.argv[5]) {
+                    song = song + " " + process.argv[4] + " " + process.argv[5];
+               }
+               if (process.argv[6]) {
+                    song = song + " " + process.argv[4] + " " + process.argv[5] + " " + process.argv[6];
 
-                       } // store parameter in variable named song
+               } // store parameter in variable named song
                clMySong(song); // print song data to console 
           } else { // if no paramter exisits at index [3]
 
@@ -52,14 +53,14 @@ switch (command) {
 
 // get tweets
 function tweetTweet() {
-    
-     const client = new Twitter (keys.twitterKeys);
+
+     const client = new Twitter(keys.twitterKeys);
 
      var params = { screen_name: 'DEVrdz88' };
      client.get('statuses/user_timeline', params, function(error, tweets, response) {
           if (!error) {
                console.log(tweets);
-               
+
           } else { console.log(error); }
      });
 }
@@ -90,23 +91,23 @@ function clMySong(song) {
                     let albumName = songData.album.name;
                     let songPreview = songData.preview_url;
                     // object literal ontaining song's data 
-                 
+
                     // printing applicable data to screen
                     console.log("Artist: " + artist);
                     console.log("Song name : " + songName);
                     console.log("Album name: " + albumName);
                     console.log("Song Preview : " + songPreview);
-                    fs.appendFile("log.txt", "  Artist: "+ artist + "  Song: "+ songName+ "  Album: "+albumName +"  Song Preview: "+ songPreview, function(err) {
+                    fs.appendFile("log.txt", "  Artist: " + artist + "  Song: " + songName + "  Album: " + albumName + "  Song Preview: " + songPreview, function(err) {
 
-  // If the code experiences any errors it will log the error to the console.
-  if (err) {
-    return console.log(err);
-  }
+                         // If the code experiences any errors it will log the error to the console.
+                         if (err) {
+                              return console.log(err);
+                         }
 
-  // Otherwise, it will print: "movies.txt was updated!"
-  console.log("log.txt was updated!");
+                         // Otherwise, it will print: "movies.txt was updated!"
+                         console.log("log.txt was updated!");
 
-});
+                    });
 
 
 
@@ -165,7 +166,7 @@ function movieData() {
 
 // get command from external js file 
 function extCmd() {
-     // This block of code will read from the "movies.txt" file.
+     // This block of code will read from the "random.txt" file.
      // It's important to include the "utf8" parameter or the code will provide stream data (garbage)
      // The code will store the contents of the reading inside the variable "data"
      fs.readFile("random.txt", "utf8", function(error, data) {
