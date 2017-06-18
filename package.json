@@ -12,6 +12,7 @@
   },
   "author": "Robert zobrist",
   "license": "ISC",
+  "email": "zobrist.robert.480@gmail.com",
   "bugs": {
     "url": "https://github.com/afflatus480/liri-node-app/issues"
   },
@@ -20,6 +21,7 @@
     "inquirer": "^3.1.0",
     "node-spotify-api": "^1.0.5",
     "request": "^2.81.0",
+
     "twitter": "^1.7.1"
   }
 }
