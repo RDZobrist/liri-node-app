@@ -61,10 +61,19 @@ function tweetTweet() {
      var params = { screen_name: 'DEVrdz88' };
      client.get('statuses/user_timeline', params, function(error, tweets, response) {
           if (!error) {
-            for (let i = 0; i<20;i++){
-              console.log('Tweet# ' + i + "'" + tweets[i].text)
-            }
-             
+               for (let i = 0; i < 20; i++) {
+                    console.log('Tweet# ' + i + "'" + tweets[i].text);
+
+                    fs.appendFile("log.txt", "  " + 'Tweet# :' + i + "'" + tweets[i].text + "   ", function(err) {
+                         // If the code experiences any errors it will log the error to the console.
+                         if (err) {
+                              return console.log(err);
+                         }
+                         // Otherwise, it will print: "movies.txt was updated!"
+                         console.log("log.txt was updated!");
+
+                    });
+               }
 
           } else { console.log(error); }
      });
@@ -155,6 +164,16 @@ function movieData() {
                console.log("Plot: " + JSON.parse(body).Plot);
                console.log("Actors and Actresses: " + JSON.parse(body).Actors);
           }
+
+          fs.appendFile("log.txt", "  Title: " + JSON.parse(body).Title + "  `Plot: " + JSON.parse(body).Plot + "  Actors and actresses: " + JSON.parse(body).Actors, function(err) {
+               // If the code experiences any errors it will log the error to the console.
+               if (err) {
+                    return console.log(err);
+               }
+               // Otherwise, it will print: "movies.txt was updated!"
+               console.log("log.txt was updated!");
+
+          });
      });
 };
 // get command from external js file 
@@ -185,10 +204,30 @@ function extCmd() {
                          if (command === "spotify-this-song") {
                               song = dataAdj[1];
                               clMySong(song);
+                              // append data to log.txt
+                              fs.appendFile("log.txt", song,function(err) {
+                                   // If the code experiences any errors it will log the error to the console.
+                                   if (err) {
+                                        return console.log(err);
+                                   }
+                                   // Otherwise, it will print: "movies.txt was updated!"
+                                   console.log("log.txt was updated!");
+
+                              });
                          }
                          if (command === "movie-this") {
                               movie = dataAdj[1];
                               movieData(movie);
+                              // append data to log.txt
+                              fs.appendFile("log.txt", movie, function(err) {
+                                   // If the code experiences any errors it will log the error to the console.
+                                   if (err) {
+                                        return console.log(err);
+                                   }
+                                   // Otherwise, it will print: "movies.txt was updated!"
+                                   console.log("log.txt was updated!");
+
+                              });
 
                          }
                          if (command === "my-tweets") {
