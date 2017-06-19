@@ -1,20 +1,23 @@
 const keys = require('./keys.js');
 const inquire = require('inquirer');
+var Twitter = require('twitter');
+var Spotify = require('node-spotify-api');
+var request = require("request");
 const fs = require('fs');
 var command = process.argv[2];
 var spotifyID = "ce82fafa69b7494280ac68da8425daa1";
 var spotifySecret = "e1f0cbf99a9f4c2fbb23539ceda73f75";
 var omdbKey = "40e9cece";
-var Twitter = require('twitter');
-var Spotify = require('node-spotify-api');
+// var prompt = inquirer.createPromptModule();
 var song;
-var request = require("request");
 var movie;
+var command;
 
 var spotify = new Spotify({
      id: spotifyID,
      secret: spotifySecret
 });
+
 switch (command) {
      case "my-tweets":
           tweetTweet();
@@ -22,7 +25,7 @@ switch (command) {
 
      case "spotify-this-song":
           if (process.argv[3]) { //if parameter exists
-               song = process.argv[3];
+               song = process.argv[3]; //set that value to variable song
                if (process.argv[4]) {
                     song = song + " " + process.argv[4];
                }
@@ -41,7 +44,6 @@ switch (command) {
 
           break;
 
-
      case "movie-this":
           movieData();
           break;
@@ -59,7 +61,10 @@ function tweetTweet() {
      var params = { screen_name: 'DEVrdz88' };
      client.get('statuses/user_timeline', params, function(error, tweets, response) {
           if (!error) {
-               console.log(tweets);
+            for (let i = 0; i<20;i++){
+              console.log('Tweet# ' + i + "'" + tweets[i].text)
+            }
+             
 
           } else { console.log(error); }
      });
@@ -98,18 +103,14 @@ function clMySong(song) {
                     console.log("Album name: " + albumName);
                     console.log("Song Preview : " + songPreview);
                     fs.appendFile("log.txt", "  Artist: " + artist + "  Song: " + songName + "  Album: " + albumName + "  Song Preview: " + songPreview, function(err) {
-
                          // If the code experiences any errors it will log the error to the console.
                          if (err) {
                               return console.log(err);
                          }
-
                          // Otherwise, it will print: "movies.txt was updated!"
                          console.log("log.txt was updated!");
 
                     });
-
-
 
                }
           });
@@ -145,10 +146,7 @@ function movieData() {
           if (!error && response.statusCode === 200) {
                let data = response.body;
 
-               // console.log(data.split(","));
-
-               // Parse the body of the site and recover just the imdbRating
-               // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
+               // console.log formatted data 
                console.log("Title: " + JSON.parse(body).Title);
                console.log("Year of Initial Release: " + JSON.parse(body).Year);
                console.log("Imdb Rating: " + JSON.parse(body).imdbRating);
@@ -156,44 +154,49 @@ function movieData() {
                console.log("Language: " + JSON.parse(body).Language);
                console.log("Plot: " + JSON.parse(body).Plot);
                console.log("Actors and Actresses: " + JSON.parse(body).Actors);
-
-
           }
      });
 };
-
-
-
 // get command from external js file 
 function extCmd() {
-     // This block of code will read from the "random.txt" file.
-     // It's important to include the "utf8" parameter or the code will provide stream data (garbage)
-     // The code will store the contents of the reading inside the variable "data"
-     fs.readFile("random.txt", "utf8", function(error, data) {
+     var commands = ["spotify-this-song," + " " + "I Want it That Way", "movie-this," + " " + "requiem for a dream", "my-tweets"];
+     var randomCommand = Math.floor(Math.random() * commands.length);
+     command = commands[randomCommand];
 
-          // If the code experiences any errors it will log the error to the console.
-          if (error) {
-               return console.log(error);
-          }
+     if (command) {
 
+          fs.writeFile("random.txt", command, function(err) {
 
+               // If the code experiences any errors it will log the error to the console.
+               if (err) {
+                    return console.log(err);
+               } else {
+                    // This block of code will read from the "random.txt" file.
+                    fs.readFile("random.txt", "utf8", function(error, data) {
 
-          // Then split it by commas (to make it more readable)
-          var dataAdj = data.split(",");
+                         // If the code experiences any errors it will log the error to the console.
+                         if (error) {
+                              return console.log(error);
+                         }
+                         // Then split it by commas (to make it more readable)
+                         var dataAdj = data.split(",");
+                         // We will then re-display the content as an array for later use.
+                         let command = dataAdj[0];
+                         if (command === "spotify-this-song") {
+                              song = dataAdj[1];
+                              clMySong(song);
+                         }
+                         if (command === "movie-this") {
+                              movie = dataAdj[1];
+                              movieData(movie);
 
-          // We will then re-display the content as an array for later use.
-          let command = dataAdj[0];
-          if (command === "spotify-this-song") {
-               song = dataAdj[1];
-               clMySong(song);
+                         }
+                         if (command === "my-tweets") {
+                              tweetTweet();
 
-          }
-          if (command === "movie-this") {
-               movie = dataAdj[1];
-               movieData(movie);
-
-          }
-
-     });
-
+                         }
+                    });
+               };
+          });
+     };
 };
