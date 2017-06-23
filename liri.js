@@ -58,18 +58,20 @@ function tweetTweet() {
 
      const client = new Twitter(keys.twitterKeys);
 
-     var params = { screen_name: 'DEVrdz88' };
+     var params = { screen_name: '@DEVrdz88' };
      client.get('statuses/user_timeline', params, function(error, tweets, response) {
           if (!error) {
+                
                for (let i = 0; i < 20; i++) {
-                    console.log('Tweet# ' + i + "'" + tweets[i].text);
 
-                    fs.appendFile("log.txt", "  " + 'Tweet# :' + i + "'" + tweets[i].text + "   ", function(err) {
+                    console.log('Tweet # ' + i + "\n\n\t"+ tweets[i].text  +"\n Time: \n\t"+ tweets[i].created_at+ "\n\n\n"); 
+
+                    fs.appendFile("log.txt", "  " + 'Tweet# :' + i + "'" + tweets[i].text + "   "  , function(err) {
                          // If the code experiences any errors it will log the error to the console.
                          if (err) {
                               return console.log(err);
                          }
-                         // Otherwise, it will print: "movies.txt was updated!"
+                         // Otherwise, it will print: "log.txt was updated!"
                          console.log("log.txt was updated!");
 
                     });
@@ -107,11 +109,11 @@ function clMySong(song) {
                     // object literal ontaining song's data 
 
                     // printing applicable data to screen
-                    console.log("Artist: " + artist);
-                    console.log("Song name : " + songName);
-                    console.log("Album name: " + albumName);
-                    console.log("Song Preview : " + songPreview);
-                    fs.appendFile("log.txt", "  Artist: " + artist + "  Song: " + songName + "  Album: " + albumName + "  Song Preview: " + songPreview, function(err) {
+                    console.log("\t\nArtist:\t\n " + artist );
+                    console.log("\t\nSong name:\t\n " + songName);
+                    console.log("\t\nAlbum name:\t\n " + albumName);
+                    console.log("\t\n Song Preview:\t\n " + songPreview );
+                    fs.appendFile("log.txt", "\t\nArtist: \t\n" + artist+ " \t\n Song:\t\n " + songName+  " \t\n Album: \t\n" + albumName+ " \t\n Song Preview: \t\n " + songPreview + "\t\n", function(err) {
                          // If the code experiences any errors it will log the error to the console.
                          if (err) {
                               return console.log(err);
