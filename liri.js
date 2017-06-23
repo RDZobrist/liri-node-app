@@ -66,7 +66,7 @@ function tweetTweet() {
 
                     console.log('Tweet # ' + i + "\n\n\t"+ tweets[i].text  +"\n Time: \n\t"+ tweets[i].created_at+ "\n\n\n"); 
 
-                    fs.appendFile("log.txt", "  " + 'Tweet# :' + i + "'" + tweets[i].text + "   "  , function(err) {
+                    fs.appendFile("log.txt", "  " + '\n\n\t\tTweet# :' + i + "'" + tweets[i].text + "   "  , function(err) {
                          // If the code experiences any errors it will log the error to the console.
                          if (err) {
                               return console.log(err);
@@ -109,11 +109,11 @@ function clMySong(song) {
                     // object literal ontaining song's data 
 
                     // printing applicable data to screen
-                    console.log("\t\nArtist:\t\n " + artist );
-                    console.log("\t\nSong name:\t\n " + songName);
-                    console.log("\t\nAlbum name:\t\n " + albumName);
-                    console.log("\t\n Song Preview:\t\n " + songPreview );
-                    fs.appendFile("log.txt", "\t\nArtist: \t\n" + artist+ " \t\n Song:\t\n " + songName+  " \t\n Album: \t\n" + albumName+ " \t\n Song Preview: \t\n " + songPreview + "\t\n", function(err) {
+                    console.log("\t\nArtist:\t\t\n " + artist );
+                    console.log("\t\nSong name:\t\t\n " + songName);
+                    console.log("\t\nAlbum name:\t\t\n " + albumName);
+                    console.log("\t\n Song Preview:\t\t\n " + songPreview );
+                    fs.appendFile("log.txt", "\t\nArtist: \t\n" + artist+ " \t\n Song:\t\n " + songName+  " \t\n Album: \t\n" + albumName+ " \t\n Song Preview: \t\n " + songPreview + "\t\n\n\n", function(err) {
                          // If the code experiences any errors it will log the error to the console.
                          if (err) {
                               return console.log(err);
@@ -167,7 +167,7 @@ function movieData() {
                console.log("Actors and Actresses: " + JSON.parse(body).Actors);
           }
 
-          fs.appendFile("log.txt", "  Title: " + JSON.parse(body).Title + "  `Plot: " + JSON.parse(body).Plot + "  Actors and actresses: " + JSON.parse(body).Actors, function(err) {
+          fs.appendFile("log.txt", "  \n\nTitle: "  + JSON.parse(body).Title + "  `\n\nPlot: " + JSON.parse(body).Plot + "  \n\nActors and actresses: " + JSON.parse(body).Actors + "\n\n\n", function(err) {
                // If the code experiences any errors it will log the error to the console.
                if (err) {
                     return console.log(err);
