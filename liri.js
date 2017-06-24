@@ -1,8 +1,9 @@
 const keys = require('./keys.js');
 const inquire = require('inquirer');
-var Twitter = require('twitter');
-var Spotify = require('node-spotify-api');
-var request = require("request");
+const Twitter = require('twitter');
+const moment = require('moment')
+const Spotify = require('node-spotify-api');
+const request = require("request");
 const fs = require('fs');
 var command = process.argv[2];
 var spotifyID = "ce82fafa69b7494280ac68da8425daa1";
@@ -61,12 +62,13 @@ function tweetTweet() {
      var params = { screen_name: '@DEVrdz88' };
      client.get('statuses/user_timeline', params, function(error, tweets, response) {
           if (!error) {
+               console.log(Date.now());
                 
                for (let i = 0; i < 20; i++) {
 
                     console.log('Tweet # ' + i + "\n\n\t"+ tweets[i].text  +"\n Time: \n\t"+ tweets[i].created_at+ "\n\n\n"); 
 
-                    fs.appendFile("log.txt", "  " + '\n\n\t\tTweet# :' + i + "'" + tweets[i].text + "   "  , function(err) {
+                    fs.appendFile("log.txt",  moment() + '\n\n\t\tTweet# :' + i + "'" + tweets[i].text + "   "  , function(err) {
                          // If the code experiences any errors it will log the error to the console.
                          if (err) {
                               return console.log(err);
@@ -78,6 +80,7 @@ function tweetTweet() {
                }
 
           } else { console.log(error); }
+
      });
 }
 
@@ -118,7 +121,7 @@ function clMySong(song) {
                          if (err) {
                               return console.log(err);
                          }
-                         // Otherwise, it will print: "movies.txt was updated!"
+                         // Otherwise, it will print: "log.txt was updated!"
                          console.log("log.txt was updated!");
 
                     });
@@ -128,6 +131,9 @@ function clMySong(song) {
 };
 /// get data on movie from omdbbody
 function movieData() {
+     if(!(process.argv[3])){
+          movie = "Mr. Nobody";
+     }else
      if (process.argv[3]) {
           movie = process.argv[3];
      }
