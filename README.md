@@ -1,3 +1,8 @@
+
+## LIRI - A Node App via Command Line 
+
+LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and Recognition Interface, LIRI is a Language Interpretation and Recognition Interface. LIRI will be a command line node app that takes in parameters and gives you back data.
+
 ## Usage
 
 1. Clone repo
@@ -18,10 +23,11 @@
 
 * NodeJS
 * JavaScript
+* NPM Inquirer[Inquirer](https://npmjs.com/package/inquirer)
 * NPM Request [Request](https://www.npmjs.com/package/request).
 * NPM Twitter [Twitter](https://www.npmjs.com/package/twitter).
 * NPM Spotify [Spotify](https://www.npmjs.com/package/spotify).
-* NPM IMDB    [OMDB API](http://www.omdbapi.com).
+* NPM OMDB    [OMDB API](http://www.omdbapi.com).
 * Ajax 
 
 ## License
@@ -57,7 +63,7 @@ node liri.js spotify-this-song `<song name here>`
 * A preview link of the song from Spotify
 * The album that the song is from
 * if no song is provided then your program will default to
-* "The Sign" by Ace of Base
+* "Dig" by Incubus
 <hr>
 <strong>node liri.js movie-this `<movie name here>`<strong>
 * This will output the following information to your terminal/bash window:

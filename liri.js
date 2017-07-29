@@ -40,7 +40,7 @@ switch (command) {
                clMySong(song); // print song data to console 
           } else { // if no paramter exisits at index [3]
 
-               clMySong("the song ace"); // print default song data to console 
+               clMySong("dig, incubus"); // print default song data to console 
           }
 
           break;
