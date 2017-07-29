@@ -62,7 +62,7 @@ function tweetTweet() {
      var params = { screen_name: '@DEVrdz88' };
      client.get('statuses/user_timeline', params, function(error, tweets, response) {
           if (!error) {
-               console.log(Date.now());
+              
                 
                for (let i = 0; i < 20; i++) {
 
@@ -178,7 +178,7 @@ function movieData() {
                if (err) {
                     return console.log(err);
                }
-               // Otherwise, it will print: "movies.txt was updated!"
+               // Otherwise, it will print: "log.txt was updated!"
                console.log("log.txt was updated!");
 
           });
@@ -232,7 +232,7 @@ function extCmd() {
                                    if (err) {
                                         return console.log(err);
                                    }
-                                   // Otherwise, it will print: "movies.txt was updated!"
+                                   // Otherwise, it will print: "log.txt was updated!"
                                    console.log("log.txt was updated!");
 
                               });

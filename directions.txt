@@ -1,0 +1,32 @@
+Instructions:
+
+As a best practice, sketch the architecture of your application before you start writing code.
+
+For this exercise, start by describing what your application does. Do this in a bullet list.
+
+Next, decide how you might divvy up these responsibilities. Would you write a single module that handles all of them? Would you write one module for each bullet list? Something else? Be sure to justify your decision.
+
+Finally, draw a diagram describing the relationships between your modules. Each arrow should describe a dependency—that is, an arrow from module A to module B indicates that module A uses module B.
+Add Comment Click to expand inline 9 lines
+
+ ~~ argv[2] expects admin or user 
+
+ - if argv[4] argv[4 and beyond] is location -- concotonate arguments
+ for (var i = 3; i < process.argv.length; i++){
+ location += (process.argv[i] + " ");
+ }  
+
+log user data to log.txt
+
+~~ wether app 
+grabs location and gets data
+outputs to screen
+(moment.js for time stamp);
+
+~~ use fs to read and write data 
+
+
+for admin
+
+display data in log.txt
+
