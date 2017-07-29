@@ -41,6 +41,7 @@ N/A
 
 Liri will work four different ways which can take in one of the following commands:
 <hr>
+
 * `my-tweets`
 
 * `spotify-this-song`
