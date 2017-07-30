@@ -1,5 +1,5 @@
 
-## LIRI - A Node App via Command Line 
+# LIRI -  ## A Node App via Command Line 
 
 LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and Recognition Interface, LIRI is a Language Interpretation and Recognition Interface. LIRI will be a command line node app that takes in parameters and gives you back data.
 
@@ -34,7 +34,7 @@ LIRI is like iPhone's SIRI. However, while SIRI is a Speech Interpretation and R
 
 N/A
 
-##Notes 
+## Notes 
 
 * LIRI will display your latest tweets. If you dont have a Twitter account it will default to my Twitter if no parameters are inputted
 
@@ -50,7 +50,7 @@ Liri will work four different ways which can take in one of the following comman
 
 * `do-what-it-says`
 
-##What Each Command Should Do
+## What Each Command Should Do
 
 <strong>node liri.js my-tweets `<twitter user name here>`<strong>
 
